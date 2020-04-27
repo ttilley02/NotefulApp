@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import NoteContext from "../NoteContext";
 import PropTypes from "prop-types";
 import "../App.css";
+import note from './note.png';
 
 // Found this on stack overflow: https://stackoverflow.com/questions/3552461/how-to-format-a-javascript-date
 function formatDate(date) {
@@ -66,7 +67,7 @@ export default class Note extends React.Component {
     const modified = formatDate(new Date(this.props.modified));
     return (
       <li className="Note">
-        <img src="../folder.png" alt="folderIcon" />
+        <img className="noteIcon" src={note} alt="folderIcon" />
         <Link to={`/notes/${this.props.id}`}>{this.props.name}</Link>
         <div>
           <p>Last modified: {modified}</p>
