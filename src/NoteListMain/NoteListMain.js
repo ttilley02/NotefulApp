@@ -1,25 +1,35 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Note from "../Note/Note";
-import { Link } from "react-router-dom";
+import { Route, Link } from "react-router-dom";
 import NoteContext from "../NoteContext";
 
 export default class NoteListMain extends React.Component {
   static contextType = NoteContext;
 
   render() {
+    
     return (
+      // <NoteContext.Provider value={contextValue}>
       <div className="Main">
         <h2>Notes</h2>
         <ul>
           {this.props.notes.map(note => {
             return (
-              <Note
+              <Route
+              
+              render={({history}) => (
+                // 'notes' prop will be entire notes array from state
+                <Note  
+                history={history}
                 modified={note.modified}
                 key={note.id}
                 id={note.id}
                 name={note.name}
-              />
+                 />
+              )}
+            />
+ 
             );
           })}
         </ul>
@@ -27,6 +37,7 @@ export default class NoteListMain extends React.Component {
           New Note
         </Link>
       </div>
+      // </NoteContext.Provider>
     );
   }
 }

@@ -66,9 +66,12 @@ export default class AddNote extends React.Component {
         return res.json();
       })
       .then(() => {
-        this.props.AddNote(noteInput);
         this.props.clearNoteItems();
         this.props.history.push("/");
+      })
+      .then(() => {
+        this.props.addNote(noteInput);
+        
       })
       .catch(error => {
         console.error(error);

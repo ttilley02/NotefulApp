@@ -5,9 +5,7 @@ import NoteContext from "../NoteContext";
 export default class NotePageMain extends React.Component {
   static contextType = NoteContext;
 
-  handleDeleteNote = noteId => {
-    this.props.history.push(`/`);
-  };
+  
 
   render() {
     // Find the note that has the same id from the url (:noteId)
@@ -21,7 +19,6 @@ export default class NotePageMain extends React.Component {
           folderId={selectedNote.folderId}
           name={selectedNote.name}
           modified={selectedNote.modified}
-          onDeleteNote={this.handleDeleteNote}
           history={this.props.history}
         />
         <p>{selectedNote.content}</p>

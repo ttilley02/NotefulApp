@@ -56,15 +56,21 @@ class App extends React.Component {
   }
 
   deleteNotefromPage = id => {
+    console.log("this first "+this.state.notes)
     this.setState({ notes: this.state.notes.filter(note => note.id !== id) });
+    console.log("this second "+ this.state.notes)
   };
 
   addFolder = newFolder => {
-    this.setState({ notes: newFolder });
+    const updatedList = this.state.folders
+    updatedList.push(newFolder)
+    this.setState({ folders: updatedList })
   };
 
   addNote = newNote => {
-    this.setState({ notes: newNote });
+    const updatedList = this.state.notes
+    updatedList.push(newNote)
+    this.setState({ notes: updatedList })
   };
 
   updateAddNoteName = event => {
@@ -102,7 +108,7 @@ class App extends React.Component {
       deleteNotefromPage: this.deleteNotefromPage,
       folders: this.state.folders,
       notes: this.state.notes,
-      history: this.context
+      history: this.history
     };
 
     return (

@@ -13,6 +13,7 @@ export default class NoteListNav extends React.Component {
         <h2>Folders</h2>
         <ul>
           {/* Loop through the array of folders passed as a prop */}
+          {console.log(this.props.folders)}
           {this.props.folders.map(folder => {
             /* for each folder in the array, set variable 'classes' as either
             'folder' or 'folder' AND 'selected'. If the selected folderId is
@@ -44,6 +45,6 @@ NoteListNav.defaultProps = {
 };
 
 NoteListNav.propTypes = {
-  folders: PropTypes.object.required,
-  selected: PropTypes.object.required
+  folders: PropTypes.object,
+  selected: PropTypes.object
 };

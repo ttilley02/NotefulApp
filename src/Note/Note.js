@@ -31,7 +31,7 @@ function formatDate(date) {
 export default class Note extends React.Component {
   static contextType = NoteContext;
 
-  DeleteNote = (id, cb) => {
+  DeleteNote = (id) => {
     console.log("Deleting note with the ID " + id);
     fetch(`http://localhost:9090/notes/` + id, {
       method: "DELETE",
@@ -50,11 +50,12 @@ export default class Note extends React.Component {
         return res.json();
       })
       .then(() => {
+        this.props.history.push("/");
+      })
+      .then(() => {
         // call the callback when the request is successful
         // this is where the App component can remove it from state
-
-        cb(id);
-        this.history.props.push("/");
+        this.context.deleteNotefromPage(id)
       })
       .catch(error => {
         console.error(error);
@@ -65,13 +66,14 @@ export default class Note extends React.Component {
     const modified = formatDate(new Date(this.props.modified));
     return (
       <li className="Note">
+        <img src="../folder.png" alt="folderIcon" />
         <Link to={`/notes/${this.props.id}`}>{this.props.name}</Link>
         <div>
           <p>Last modified: {modified}</p>
 
           <button
             onClick={() => {
-              this.DeleteNote(this.props.id, this.context.deleteNotefromPage);
+              this.DeleteNote(this.props.id);
             }}
           >
             Delete Note
@@ -82,7 +84,7 @@ export default class Note extends React.Component {
   }
 }
 
-Note.PropTypes = {
+Note.propTypes = {
   id: PropTypes.number.isRequired,
   folderId: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,

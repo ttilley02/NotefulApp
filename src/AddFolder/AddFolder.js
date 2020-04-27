@@ -19,7 +19,6 @@ export default class AddFolder extends React.Component {
     let folderInput = {
       id: "",
       name: this.props.state.folderName.value,
-      modified: ""
     };
     console.log("Adding folder " + folderInput.name);
     fetch(`http://localhost:9090/folders/`, {
@@ -40,12 +39,12 @@ export default class AddFolder extends React.Component {
         return res.json();
       })
       .then(() => {
-        this.props.AddFolder(folderInput);
-        console.log(folderInput);
-      })
-      .then(() => {
         this.props.clearFolderName();
         this.props.history.push("/");
+      })
+      .then(() => {
+        console.log("this___"+folderInput);
+        this.props.addFolder(folderInput);
       })
 
       .catch(error => {
