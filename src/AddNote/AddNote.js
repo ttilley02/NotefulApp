@@ -23,8 +23,8 @@ export default class AddNote extends React.Component {
     const name = this.props.state.noteName.value.trim();
     if (name.length === 0) {
       return "Name is required";
-    } else if (name.length > 32) {
-      return "Name must be less than 32 characters long";
+    } else if (name.length > 25) {
+      return "Name must be less than 25 characters long";
     }
   }
 
@@ -71,7 +71,6 @@ export default class AddNote extends React.Component {
       })
       .then(() => {
         this.props.addNote(noteInput);
-        
       })
       .catch(error => {
         console.error(error);

@@ -9,8 +9,8 @@ export default class AddFolder extends React.Component {
     const name = this.props.state.folderName.value.trim();
     if (name.length === 0) {
       return "Name is required";
-    } else if (name.length > 32) {
-      return "Name must be less than 32 characters long";
+    } else if (name.length > 25) {
+      return "Name must be less than 25 characters long";
     }
   }
 
@@ -18,7 +18,7 @@ export default class AddFolder extends React.Component {
     event.preventDefault();
     let folderInput = {
       id: "",
-      name: this.props.state.folderName.value,
+      name: this.props.state.folderName.value
     };
     console.log("Adding folder " + folderInput.name);
     fetch(`http://localhost:9090/folders/`, {
@@ -43,7 +43,7 @@ export default class AddFolder extends React.Component {
         this.props.history.push("/");
       })
       .then(() => {
-        console.log("this___"+folderInput);
+        console.log("this___" + folderInput);
         this.props.addFolder(folderInput);
       })
 

@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 import NoteContext from "../NoteContext";
 import PropTypes from "prop-types";
 import "../App.css";
-import note from './note.png';
+import note from "./note.png";
+import deleteIcon from "./deleteIcon.png";
 
 // Found this on stack overflow: https://stackoverflow.com/questions/3552461/how-to-format-a-javascript-date
 function formatDate(date) {
@@ -32,7 +33,7 @@ function formatDate(date) {
 export default class Note extends React.Component {
   static contextType = NoteContext;
 
-  DeleteNote = (id) => {
+  DeleteNote = id => {
     console.log("Deleting note with the ID " + id);
     fetch(`http://localhost:9090/notes/` + id, {
       method: "DELETE",
@@ -56,7 +57,7 @@ export default class Note extends React.Component {
       .then(() => {
         // call the callback when the request is successful
         // this is where the App component can remove it from state
-        this.context.deleteNotefromPage(id)
+        this.context.deleteNotefromPage(id);
       })
       .catch(error => {
         console.error(error);
@@ -70,14 +71,15 @@ export default class Note extends React.Component {
         <img className="noteIcon" src={note} alt="folderIcon" />
         <Link to={`/notes/${this.props.id}`}>{this.props.name}</Link>
         <div>
-          <p>Last modified: {modified}</p>
+          <p>Last update: {modified}</p>
 
           <button
+            className="deleteButtonContainer"
             onClick={() => {
               this.DeleteNote(this.props.id);
             }}
           >
-            Delete Note
+            <img className="deleteButton" src={deleteIcon} alt="deletebutton" />
           </button>
         </div>
       </li>

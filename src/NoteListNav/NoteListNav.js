@@ -2,7 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import NoteContext from "../NoteContext";
-import folderIcon from './folder.png';
+import folderIcon from "./folder.png";
+import plus from "./plus.png";
 
 // This component is rendered in the sidebar for the '/' and 'folder/:folderId' routes
 export default class NoteListNav extends React.Component {
@@ -23,12 +24,10 @@ export default class NoteListNav extends React.Component {
             const classes =
               this.props.selected === folder.id ? "folder selected" : "folder";
 
-            // Create list item for each folder in the array
+            // Create list item for each folder in the array.
             return (
               <li key={folder.id}>
-                <img className="folderIcon" src={folderIcon} alt="folderIcon"/>
-                <br></br>
-                <br></br>
+                <img className="folderIcon" src={folderIcon} alt="folderIcon" />
                 <Link className={classes} to={`/folders/${folder.id}`}>
                   {folder.name}
                 </Link>
@@ -37,7 +36,7 @@ export default class NoteListNav extends React.Component {
           })}
         </ul>
         <Link className="addButton" to="/AddFolder">
-          New Folder
+          <img className="plusIcon" src={plus} alt="Add a folder" />
         </Link>
       </div>
     );
@@ -49,6 +48,6 @@ NoteListNav.defaultProps = {
 };
 
 NoteListNav.propTypes = {
-  folders: PropTypes.object,
+  folders: PropTypes.array,
   selected: PropTypes.object
 };

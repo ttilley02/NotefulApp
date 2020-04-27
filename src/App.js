@@ -9,6 +9,8 @@ import { Route, Link } from "react-router-dom";
 import NoteContext from "./NoteContext";
 import AddNote from "./AddNote/AddNote";
 import AddFolder from "./AddFolder/AddFolder";
+import note from "./Note/note.png";
+import deleteIcon from "./deleteIcon.png";
 
 class App extends React.Component {
   static contextType = NoteContext;
@@ -56,21 +58,21 @@ class App extends React.Component {
   }
 
   deleteNotefromPage = id => {
-    console.log("this first "+this.state.notes)
+    console.log("this first " + this.state.notes);
     this.setState({ notes: this.state.notes.filter(note => note.id !== id) });
-    console.log("this second "+ this.state.notes)
+    console.log("this second " + this.state.notes);
   };
 
   addFolder = newFolder => {
-    const updatedList = this.state.folders
-    updatedList.push(newFolder)
-    this.setState({ folders: updatedList })
+    const updatedList = this.state.folders;
+    updatedList.push(newFolder);
+    this.setState({ folders: updatedList });
   };
 
   addNote = newNote => {
-    const updatedList = this.state.notes
-    updatedList.push(newNote)
-    this.setState({ notes: updatedList })
+    const updatedList = this.state.notes;
+    updatedList.push(newNote);
+    this.setState({ notes: updatedList });
   };
 
   updateAddNoteName = event => {
@@ -214,6 +216,66 @@ class App extends React.Component {
             />
           </main>
         </div>
+        <ul>
+          <li className="Note">
+            <img className="noteIcon" src={note} alt="folderIcon" />
+            <p>note exmaple</p>
+            <div>
+              <p>Last change: today</p>
+
+              <button
+                className="deleteButtonContainer"
+                onClick={() => {
+                  this.DeleteNote(this.props.id);
+                }}
+              >
+                <img
+                  className="deleteButton"
+                  src={deleteIcon}
+                  alt="folderIcon"
+                />
+              </button>
+            </div>
+          </li>
+          <li className="Note">
+            <img className="noteIcon" src={note} alt="folderIcon" />
+            <p>note exmaple</p>
+            <div>
+              <p>Last change: today</p>
+
+              <button>Delete Note</button>
+            </div>
+          </li>
+          <li className="Note">
+            <img className="noteIcon" src={note} alt="folderIcon" />
+            <p>note exmaple</p>
+            <div>
+              <p>Last change: today</p>
+
+              <button>
+                <img src={deleteIcon} alt="ee" />
+              </button>
+            </div>
+          </li>
+          <li className="Note">
+            <img className="noteIcon" src={note} alt="folderIcon" />
+            <p>note exmaple</p>
+            <div>
+              <p>Last change: today</p>
+
+              <button>Delete Note</button>
+            </div>
+          </li>
+          <li className="Note">
+            <img className="noteIcon" src={note} alt="folderIcon" />
+            <p>note exmaple</p>
+            <div>
+              <p>Last change: today</p>
+
+              <button>Delete Note</button>
+            </div>
+          </li>
+        </ul>
       </NoteContext.Provider>
     );
   }
