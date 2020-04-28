@@ -35,7 +35,7 @@ export default class AddNote extends React.Component {
     let folderIdResult = Object.values(this.props.folderList).find(
       folder => folder.name === this.props.state.noteFolder.value
     );
-    console.log(folderIdResult);
+
     const min = 1;
     const max = 10000;
     const generatedId = min + Math.random() * (max - min);
@@ -44,11 +44,11 @@ export default class AddNote extends React.Component {
     let noteInput = {
       id: toString(generatedId),
       name: this.props.state.noteName.value,
-      modified: newDate.toLocaleDateString('en-US'),
+      modified: newDate.toLocaleDateString("en-US"),
       folderId: folderIdResult.id,
       content: this.props.state.noteContent.value
     };
-    console.log("Adding note " + noteInput.name);
+
     fetch(`http://localhost:9090/notes/`, {
       method: "POST",
       body: JSON.stringify(noteInput),
@@ -90,17 +90,17 @@ export default class AddNote extends React.Component {
     );
 
     return (
-      <div>
-        <form className="AddNote" onSubmit={e => this.handleSubmit(e)}>
+      <div className="addNote ">
+        <form onSubmit={e => this.handleSubmit(e)}>
           <h2>Add Note</h2>
           <div className="note__hint" />
           <div className="form-group">
-            <label className="nameLabel" htmlFor="name">Name : </label>
             <input
               type="text"
-              className="noteName__control"
+              className="folderNote__control"
               name="name"
               id="name"
+              placeholder="Note Name..."
               value={this.props.state.noteName.value}
               onChange={this.props.updateAddNoteName}
               required
@@ -109,38 +109,44 @@ export default class AddNote extends React.Component {
               <ValidationError message={this.validateNoteName()} />
             )}
           </div>
-          <br></br>
           <div className="note__hint" />
           <div className="form-group">
-            <label htmlFor="name">Content: </label>
+            <label htmlFor="name" />
             <textarea
               type="text"
-              className="noteConte__control"
+              className="folderNote__control"
               name="name"
               id="name"
+              placeholder="Content..."
               value={this.props.state.noteContent.value}
               onChange={this.props.updateAddNoteContent}
               required
             />
           </div>
-          <br></br>
-          Folders:
+
           <select
-            className="optionLabel"
+            className="folderNoteSelect__control"
             id="folderChoice"
             name="Folder"
             onChange={e => this.props.folderSelection(e)}
           >
-  
-            <option value="None">Select one...</option>
+            <option value="None">Select Folder</option>
             {folderOptions}
           </select>
-          <button type="submit" disabled={this.validateNoteName()}>
+          <br />
+
+          <button
+            className="submitButton"
+            type="submit"
+            disabled={this.validateNoteName()}
+          >
             Submit
           </button>
-          <Link className="addButton" to="/">
-          Go Back
-        </Link>
+          <br />
+          <br />
+          <Link className="goBack" to="/">
+            Go Back
+          </Link>
         </form>
       </div>
     );

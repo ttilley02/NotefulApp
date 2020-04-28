@@ -9,13 +9,12 @@ import NoteContext from "./NoteContext";
 import AddNote from "./AddNote/AddNote";
 import AddFolder from "./AddFolder/AddFolder";
 
-
 class App extends React.Component {
   static contextType = NoteContext;
 
   state = {
-    folders:[],
-    notes:[],
+    folders: [],
+    notes: [],
     noteName: {
       value: "",
       touched: false
@@ -40,20 +39,17 @@ class App extends React.Component {
       .then(response => response.json())
       .then(data => {
         //store response in this.state.folders
-        console.log(data)
-        this.setState({folders: data});
+
+        this.setState({ folders: data });
       });
     fetch("http://localhost:9090/notes")
       .then(response => response.json())
       .then(data => {
         //store response in this.state.folders
-        console.log(data)
-        this.setState({notes:data});
-        console.log(this.state)
+
+        this.setState({ notes: data });
       });
   }
-
-  
 
   deleteNotefromPage = id => {
     this.setState({ notes: this.state.notes.filter(note => note.id !== id) });
@@ -63,14 +59,12 @@ class App extends React.Component {
     const updatedList = this.state.folders;
     updatedList.push(newFolder);
     this.setState({ folders: updatedList });
-    console.log(this.state.folders)
   };
 
   addNote = newNote => {
     const updatedList = this.state.notes;
     updatedList.push(newNote);
     this.setState({ notes: updatedList });
-    console.log(this.state.notes)
   };
 
   updateAddNoteName = event => {
@@ -103,7 +97,7 @@ class App extends React.Component {
   };
 
   render() {
-      let contextValue = {
+    let contextValue = {
       notesAndFolderInfo: this.state,
       deleteNotefromPage: this.deleteNotefromPage,
       folders: this.state.folders,
@@ -145,9 +139,9 @@ class App extends React.Component {
               )}
             />
             {/* Note Route */}
-              <Route 
-              exact 
-              path="/notes/:noteId" 
+            <Route
+              exact
+              path="/notes/:noteId"
               render={props => (
                 // folders prop will be entire folders array from state
                 // selected prop will be the id from the url (:folderId)
@@ -168,11 +162,11 @@ class App extends React.Component {
               path="/"
               render={({ history }) => (
                 // 'notes' prop will be entire notes array from state
-                <NoteListMain 
-                notes={this.state.notes} 
-                history={history}
-                state={this.state} 
-                 />
+                <NoteListMain
+                  notes={this.state.notes}
+                  history={history}
+                  state={this.state}
+                />
               )}
             />
             {/* Folder Route */}
@@ -194,22 +188,19 @@ class App extends React.Component {
               }}
             />
             {/* Note Route */}
-            <Route 
-              exact 
-              path="/notes/:noteId" 
-              render={(props) => {
-                  return (
-                
-                    <NotePageMain
-                    notes={this.state.notes} 
+            <Route
+              exact
+              path="/notes/:noteId"
+              render={props => {
+                return (
+                  <NotePageMain
+                    notes={this.state.notes}
                     selected={props.match.params.noteId}
-                    state={this.state} 
-                
-                      
-                    />
-                  );
-                }}
-              />
+                    state={this.state}
+                  />
+                );
+              }}
+            />
             {/* Add Note Route */}
             <Route
               exact
@@ -246,7 +237,6 @@ class App extends React.Component {
             />
           </main>
         </div>
-
       </NoteContext.Provider>
     );
   }

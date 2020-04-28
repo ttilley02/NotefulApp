@@ -20,7 +20,7 @@ export default class AddFolder extends React.Component {
       id: "",
       name: this.props.state.folderName.value
     };
-    console.log("Adding folder " + folderInput.name);
+
     fetch(`http://localhost:9090/folders/`, {
       method: "POST",
       body: JSON.stringify(folderInput),
@@ -43,7 +43,6 @@ export default class AddFolder extends React.Component {
         this.props.history.push("/");
       })
       .then(() => {
-        console.log("this___" + folderInput);
         this.props.addFolder(folderInput);
       })
 
@@ -54,17 +53,18 @@ export default class AddFolder extends React.Component {
 
   render() {
     return (
-      <div>
-        <form className="AddFolder" onSubmit={e => this.handleSubmitFolder(e)}>
+      <div className="addFolder">
+        <form onSubmit={e => this.handleSubmitFolder(e)}>
           <h2>Add Folder</h2>
           <div className="folder__hint" />
           <div className="form-group">
-            <label htmlFor="name">Name : </label>
+            <label htmlFor="name" />
             <input
               type="text"
-              className="folderName__control"
+              className="folderNote__control"
               name="name"
               id="name"
+              placeholder="Folder Name..."
               value={this.props.state.folderName.value}
               onChange={this.props.updateAddFolderName}
               required
@@ -73,14 +73,17 @@ export default class AddFolder extends React.Component {
               <ValidationError message={this.validateFolderName()} />
             )}
           </div>
-          <br>
-          </br>
-          <button type="submit" disabled={this.validateFolderName()}>
+          <br />
+          <button
+            className="submitButton"
+            type="submit"
+            disabled={this.validateFolderName()}
+          >
             Submit
           </button>
         </form>
-        <br></br>
-        <Link className="addButton" to="/">
+        <br />
+        <Link className="goBack" to="/">
           Go Back
         </Link>
       </div>

@@ -1,18 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-
 export default class NotePageNav extends React.Component {
-  
-
   render() {
-    console.log("qq"+this.props.state)
-    console.log("ewew"+this.props.folders)
-    console.log("Asfsafsd"+this.props.notes)
-
     //find the id of the note that matches the noteId from the url
-    let newA = this.props.notes
-    console.log(newA)
+    let newA = this.props.notes;
+
     const selectedFolderId = this.props.notes.find(
       note => note.id === this.props.selected
     ).folderId;
@@ -21,7 +14,6 @@ export default class NotePageNav extends React.Component {
     const selectedFolder = this.props.folders.find(
       folder => folder.id === selectedFolderId
     );
-    console.log(selectedFolder);
 
     return (
       <div className="Sidebar">

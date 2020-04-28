@@ -1,12 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=BioRhyme&family=Open+Sans&family=Roboto&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Ubuntu:ital@0;1&display=swap");
 
-
-
 .App {
-  text-align: center;
-  width: auto;
-  border: solid rgb(60,60,60) 2px;
+  border-left: solid rgb(60, 60, 60) 1px;
+  border-right: solid rgb(60, 60, 60) 1px;
+}
+
+aside {
+  border-left: solid rgb(60, 60, 60) 1px;
+  border-right: solid rgb(60, 60, 60) 1px;
 }
 
 .App-logo {
@@ -14,17 +16,11 @@
   pointer-events: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.navHead{
+.navHead {
   text-align: center;
 }
 .App-header {
-  background-color:  white;
+  background-color: white;
   margin-top: 6px;
   height: 30px;
   display: flex;
@@ -35,7 +31,7 @@
 }
 
 .App-header a {
-  color: rgb(60,60,60);
+  color: rgb(60, 60, 60);
   font-family: "Roboto", sans-serif;
   text-decoration: none;
 }
@@ -65,11 +61,9 @@
   border: 6px solid white;
   color: black;
   font-family: "Roboto", sans-serif;
-
 }
 
 .Main {
-
   box-sizing: border-box;
   padding-left: 5px;
   padding-right: 5px;
@@ -77,73 +71,115 @@
   width: 81%;
   display: inline-block;
   text-align: left;
-  background:  white;
+  background: white;
   border: 6px solid white;
   font-family: "Roboto", sans-serif;
-  
-
 }
 
 .Main ul {
   list-style: none;
   padding: 0;
-  
 }
 
-.ul{
-  padding:10px;
+.ul {
+  padding: 10px;
 }
 
-.folderList{
-  color:black;
+.folderList {
+  color: black;
   text-decoration: none;
   padding-top: 8px;
-  
-  font-size:20px;
-  
-  
+
+  font-size: 20px;
 }
 
-
-.folderList img{
-  box-shadow: 5px 5px 5px  rgb(60, 60, 60);
-  
-  
+.folderList img {
+  box-shadow: 5px 5px 5px rgb(60, 60, 60);
 }
 
-
-.AddNote div {
- display: inline-block;
- padding: 0.2rem;
- margin: 0.20rem;
- font-family: "Open Sans", sans-serif;
- color: rgb(60, 60, 60);
- background-color: white;
- border-radius: 7px;
-}
-
-
-.AddFolder div {
-  display: inline-block;
+.addNote {
+  text-align: center;
+  width: inherit;
+  display: block;
   padding: 0.2rem;
-  margin: 0.20rem;
+  margin: 0.2rem;
   font-family: "Open Sans", sans-serif;
-  color:  rgb(60, 60, 60);
+  color: rgb(60, 60, 60);
   background-color: white;
+  border-radius: 7px;
+}
+
+.addFolder {
+  text-align: center;
+  width: inherit;
+  display: block;
+  padding: 0.2rem;
+  margin: 0.2rem;
+  font-family: "Open Sans", sans-serif;
+  color: rgb(60, 60, 60);
+  background-color: white;
+  border-radius: 7px;
+}
+.folderNote__control {
+  position: center;
   border-radius: 3px;
+  width: 200px;
+  margin-bottom: 2em;
+}
+
+.folderNoteSelect__control {
+  position: center;
+  margin-bottom: 1em;
+  border-radius: 3px;
+}
+
+.submitButton {
+  position: relative;
+  background-color: white;
+  border: solid black 1px;
+  font-size: 18px;
+  color: black;
+  padding-right: 13px;
+  width: 75px;
+  text-align: center;
+  -webkit-transition-duration: 0.9s; /* Safari */
+  transition-duration: 0.9s;
+  text-decoration: none;
+  overflow: hidden;
+  cursor: pointer;
+}
+.submitButton:after {
+  content: "";
+  background: black;
+  display: block;
+  position: absolute;
+  padding-top: 300%;
+  padding-left: 350%;
+  margin-left: -20px !important;
+  margin-top: -120%;
+  opacity: 0;
+  transition: all 0.8s;
+}
+
+.submitButton:active:after {
+  padding: 0;
+  margin: 0;
+  opacity: 1;
+  transition: 0s;
 }
 
 .goBack {
-  display: inline-block;
+  text-align: center;
   font-family: "Open Sans", sans-serif;
-  color: black;
+  color: white;
+  width: 200px;
   border-radius: 3px;
+  text-decoration: none;
+  background-color: black;
 }
 
-
-
 .Note {
-   float: left;
+  float: left;
   display: block;
   box-sizing: border-box;
   padding: 0.2rem;
@@ -151,12 +187,12 @@
   border: 1px solid lightgray;
   font-family: "Open Sans", sans-serif;
   width: 220px;
-  
+
   font-family: "Ubuntu", sans-serif;
   font-weight: 400;
   font-size: 20px;
-  color:  grey;
-  background-color:rgb(90, 90, 90);
+  color: grey;
+  background-color: rgb(90, 90, 90);
   border-radius: 12px;
 }
 
@@ -168,14 +204,11 @@
 .plusIcon {
   height: 32px;
   width: 32px;
-
 }
 
 div {
-  width: 900px;
+  width: 1000px;
   margin: 0 auto;
-  overflow: auto;
-
 }
 
 .noteIcon {
@@ -188,11 +221,9 @@ div {
   border: 2px;
 }
 
-.noteName{
+.noteName {
   text-decoration: none;
-  color:white
-   
-  
+  color: white;
 }
 
 .folderIcon {
@@ -217,20 +248,15 @@ div {
 .deleteButtonContainer {
   background: white;
   border-radius: 12px;
-  
 }
 
-
-.nameLabel{
-  padding-left:10px;
+.nameLabel {
+  padding-left: 10px;
   border-radius: 7px;
-  
 }
 
-.optionLabel{
-  padding-left:10px;
-  
+.optionLabel {
+  padding-left: 10px;
 }
-
 
 /* https://designshack.net/articles/css/5-simple-and-practical-css-list-styles-you-can-copy-and-paste/ */

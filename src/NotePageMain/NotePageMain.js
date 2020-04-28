@@ -5,16 +5,14 @@ import NoteContext from "../NoteContext";
 export default class NotePageMain extends React.Component {
   static contextType = NoteContext;
 
-  
-
   render() {
-    console.log("uoiu  "+this.props.notes)
     // Find the note that has the same id from the url (:noteId)
     let selectedNote = this.props.notes.find(
       note => note.id === this.props.selected
     );
     return (
       <div className="Main noteContent">
+        <h2>Notes</h2>
         <Note
           id={selectedNote.id}
           folderId={selectedNote.folderId}

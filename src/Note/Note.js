@@ -27,14 +27,13 @@ function formatDate(date) {
   var monthIndex = date.getMonth();
   var year = date.getFullYear();
 
-  return monthNames[monthIndex]+"/"+day+"/"+ year;
+  return monthNames[monthIndex] + "/" + day + "/" + year;
 }
 
 export default class Note extends React.Component {
   static contextType = NoteContext;
 
   DeleteNote = id => {
-    console.log("Deleting note with the ID " + id);
     fetch(`http://localhost:9090/notes/` + id, {
       method: "DELETE",
       headers: {
@@ -69,7 +68,9 @@ export default class Note extends React.Component {
     return (
       <li className="Note">
         <img className="noteIcon" src={note} alt="folderIcon" />
-        <Link className="noteName" to={`/notes/${this.props.id}`}>{this.props.name}</Link>
+        <Link className="noteName" to={`/notes/${this.props.id}`}>
+          {this.props.name}
+        </Link>
         <div>
           <p>Updated: {modified}</p>
 

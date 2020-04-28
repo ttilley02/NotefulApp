@@ -9,11 +9,9 @@ export default class NoteListMain extends React.Component {
   static contextType = NoteContext;
 
   render() {
-    console.log(this.props.notes)
     return (
       // <NoteContext.Provider value={contextValue}>
       <div className="Main">
-       
         <ul>
           {this.props.notes.map(note => {
             return (
