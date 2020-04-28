@@ -8,12 +8,13 @@ export default class NotePageMain extends React.Component {
   
 
   render() {
+    console.log("uoiu  "+this.props.notes)
     // Find the note that has the same id from the url (:noteId)
-    const selectedNote = this.context.notes.find(
-      note => note.id === this.props.match.params.noteId
+    let selectedNote = this.props.notes.find(
+      note => note.id === this.props.selected
     );
     return (
-      <div className="Main">
+      <div className="Main noteContent">
         <Note
           id={selectedNote.id}
           folderId={selectedNote.folderId}

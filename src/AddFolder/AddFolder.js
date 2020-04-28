@@ -73,10 +73,13 @@ export default class AddFolder extends React.Component {
               <ValidationError message={this.validateFolderName()} />
             )}
           </div>
+          <br>
+          </br>
           <button type="submit" disabled={this.validateFolderName()}>
             Submit
           </button>
         </form>
+        <br></br>
         <Link className="addButton" to="/">
           Go Back
         </Link>

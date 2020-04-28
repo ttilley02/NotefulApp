@@ -1,6 +1,5 @@
 import React from "react";
 import "./App.css";
-import STORE from "./dummyStore";
 import NoteListNav from "./NoteListNav/NoteListNav";
 import NoteListMain from "./NoteListMain/NoteListMain";
 import NotePageMain from "./NotePageMain/NotePageMain";
@@ -9,14 +8,14 @@ import { Route, Link } from "react-router-dom";
 import NoteContext from "./NoteContext";
 import AddNote from "./AddNote/AddNote";
 import AddFolder from "./AddFolder/AddFolder";
-import note from "./Note/note.png";
-import deleteIcon from "./deleteIcon.png";
+
 
 class App extends React.Component {
   static contextType = NoteContext;
 
   state = {
-    STORE,
+    folders:[],
+    notes:[],
     noteName: {
       value: "",
       touched: false
@@ -41,38 +40,37 @@ class App extends React.Component {
       .then(response => response.json())
       .then(data => {
         //store response in this.state.folders
-        this.setState({
-          folders: data
-        });
+        console.log(data)
+        this.setState({folders: data});
       });
-
-    //fetch request for notes
     fetch("http://localhost:9090/notes")
       .then(response => response.json())
       .then(data => {
         //store response in this.state.folders
-        this.setState({
-          notes: data
-        });
+        console.log(data)
+        this.setState({notes:data});
+        console.log(this.state)
       });
   }
 
+  
+
   deleteNotefromPage = id => {
-    console.log("this first " + this.state.notes);
     this.setState({ notes: this.state.notes.filter(note => note.id !== id) });
-    console.log("this second " + this.state.notes);
   };
 
   addFolder = newFolder => {
     const updatedList = this.state.folders;
     updatedList.push(newFolder);
     this.setState({ folders: updatedList });
+    console.log(this.state.folders)
   };
 
   addNote = newNote => {
     const updatedList = this.state.notes;
     updatedList.push(newNote);
     this.setState({ notes: updatedList });
+    console.log(this.state.notes)
   };
 
   updateAddNoteName = event => {
@@ -105,7 +103,7 @@ class App extends React.Component {
   };
 
   render() {
-    const contextValue = {
+      let contextValue = {
       notesAndFolderInfo: this.state,
       deleteNotefromPage: this.deleteNotefromPage,
       folders: this.state.folders,
@@ -147,7 +145,20 @@ class App extends React.Component {
               )}
             />
             {/* Note Route */}
-            <Route exact path="/notes/:noteId" component={NotePageNav} />
+              <Route 
+              exact 
+              path="/notes/:noteId" 
+              render={props => (
+                // folders prop will be entire folders array from state
+                // selected prop will be the id from the url (:folderId)
+                <NotePageNav
+                  folders={this.state.folders}
+                  notes={this.state.notes}
+                  state={this.state}
+                  selected={props.match.params.noteId}
+                />
+              )}
+            />
           </aside>
           <main>
             {/* Show/hide components in 'MAIN' section based on route */}
@@ -157,7 +168,11 @@ class App extends React.Component {
               path="/"
               render={({ history }) => (
                 // 'notes' prop will be entire notes array from state
-                <NoteListMain notes={this.state.notes} history={history} />
+                <NoteListMain 
+                notes={this.state.notes} 
+                history={history}
+                state={this.state} 
+                 />
               )}
             />
             {/* Folder Route */}
@@ -179,7 +194,22 @@ class App extends React.Component {
               }}
             />
             {/* Note Route */}
-            <Route exact path="/notes/:noteId" component={NotePageMain} />
+            <Route 
+              exact 
+              path="/notes/:noteId" 
+              render={(props) => {
+                  return (
+                
+                    <NotePageMain
+                    notes={this.state.notes} 
+                    selected={props.match.params.noteId}
+                    state={this.state} 
+                
+                      
+                    />
+                  );
+                }}
+              />
             {/* Add Note Route */}
             <Route
               exact
@@ -216,66 +246,7 @@ class App extends React.Component {
             />
           </main>
         </div>
-        <ul>
-          <li className="Note">
-            <img className="noteIcon" src={note} alt="folderIcon" />
-            <p>note exmaple</p>
-            <div>
-              <p>Last change: today</p>
 
-              <button
-                className="deleteButtonContainer"
-                onClick={() => {
-                  this.DeleteNote(this.props.id);
-                }}
-              >
-                <img
-                  className="deleteButton"
-                  src={deleteIcon}
-                  alt="folderIcon"
-                />
-              </button>
-            </div>
-          </li>
-          <li className="Note">
-            <img className="noteIcon" src={note} alt="folderIcon" />
-            <p>note exmaple</p>
-            <div>
-              <p>Last change: today</p>
-
-              <button>Delete Note</button>
-            </div>
-          </li>
-          <li className="Note">
-            <img className="noteIcon" src={note} alt="folderIcon" />
-            <p>note exmaple</p>
-            <div>
-              <p>Last change: today</p>
-
-              <button>
-                <img src={deleteIcon} alt="ee" />
-              </button>
-            </div>
-          </li>
-          <li className="Note">
-            <img className="noteIcon" src={note} alt="folderIcon" />
-            <p>note exmaple</p>
-            <div>
-              <p>Last change: today</p>
-
-              <button>Delete Note</button>
-            </div>
-          </li>
-          <li className="Note">
-            <img className="noteIcon" src={note} alt="folderIcon" />
-            <p>note exmaple</p>
-            <div>
-              <p>Last change: today</p>
-
-              <button>Delete Note</button>
-            </div>
-          </li>
-        </ul>
       </NoteContext.Provider>
     );
   }

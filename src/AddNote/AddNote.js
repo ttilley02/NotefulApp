@@ -3,6 +3,7 @@ import ValidationError from "../ValidationError";
 import "../App.css";
 import NoteContext from "../NoteContext";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
 export default class AddNote extends React.Component {
   static contextType = NoteContext;
@@ -41,9 +42,9 @@ export default class AddNote extends React.Component {
     let newDate = new Date();
 
     let noteInput = {
-      id: generatedId,
+      id: toString(generatedId),
       name: this.props.state.noteName.value,
-      modified: newDate,
+      modified: newDate.toLocaleDateString('en-US'),
       folderId: folderIdResult.id,
       content: this.props.state.noteContent.value
     };
@@ -94,7 +95,7 @@ export default class AddNote extends React.Component {
           <h2>Add Note</h2>
           <div className="note__hint" />
           <div className="form-group">
-            <label htmlFor="name">Name : </label>
+            <label className="nameLabel" htmlFor="name">Name : </label>
             <input
               type="text"
               className="noteName__control"
@@ -108,6 +109,7 @@ export default class AddNote extends React.Component {
               <ValidationError message={this.validateNoteName()} />
             )}
           </div>
+          <br></br>
           <div className="note__hint" />
           <div className="form-group">
             <label htmlFor="name">Content: </label>
@@ -121,17 +123,24 @@ export default class AddNote extends React.Component {
               required
             />
           </div>
+          <br></br>
+          Folders:
           <select
+            className="optionLabel"
             id="folderChoice"
             name="Folder"
             onChange={e => this.props.folderSelection(e)}
           >
+  
             <option value="None">Select one...</option>
             {folderOptions}
           </select>
           <button type="submit" disabled={this.validateNoteName()}>
             Submit
           </button>
+          <Link className="addButton" to="/">
+          Go Back
+        </Link>
         </form>
       </div>
     );

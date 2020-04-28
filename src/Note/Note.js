@@ -9,25 +9,25 @@ import deleteIcon from "./deleteIcon.png";
 // Found this on stack overflow: https://stackoverflow.com/questions/3552461/how-to-format-a-javascript-date
 function formatDate(date) {
   var monthNames = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December"
+    "01",
+    "02",
+    "03",
+    "04",
+    "05",
+    "06",
+    "07",
+    "08",
+    "09",
+    "10",
+    "11",
+    "12"
   ];
 
   var day = date.getDate();
   var monthIndex = date.getMonth();
   var year = date.getFullYear();
 
-  return monthNames[monthIndex] + " " + day + ", " + year;
+  return monthNames[monthIndex]+"/"+day+"/"+ year;
 }
 
 export default class Note extends React.Component {
@@ -69,9 +69,9 @@ export default class Note extends React.Component {
     return (
       <li className="Note">
         <img className="noteIcon" src={note} alt="folderIcon" />
-        <Link to={`/notes/${this.props.id}`}>{this.props.name}</Link>
+        <Link className="noteName" to={`/notes/${this.props.id}`}>{this.props.name}</Link>
         <div>
-          <p>Last update: {modified}</p>
+          <p>Updated: {modified}</p>
 
           <button
             className="deleteButtonContainer"
