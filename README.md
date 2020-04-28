@@ -1,4 +1,4 @@
-## Noteful APP
+## Noteful App
 Simply create notes and folders to display in a a table format  
 Use the plus signs to add a folder or a note.
 Use the X sign to delete notes.
