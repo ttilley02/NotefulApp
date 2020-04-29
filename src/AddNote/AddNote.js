@@ -154,10 +154,10 @@ export default class AddNote extends React.Component {
 }
 
 AddNote.propTypes = {
-  updateAddNoteName: PropTypes.func.isRequired,
-  updateAddNoteContent: PropTypes.func.isRequired,
-  clearNoteItems: PropTypes.func.isRequired,
-  state: PropTypes.object.isRequired,
-  folderList: PropTypes.object.isRequired,
-  folderSelection: PropTypes.object.isRequired
+  updateAddNoteName: PropTypes.func,
+  updateAddNoteContent: PropTypes.func,
+  clearNoteItems: PropTypes.func,
+  state: PropTypes.object,
+  folderList: PropTypes.object,
+  folderSelection: PropTypes.object
 };
