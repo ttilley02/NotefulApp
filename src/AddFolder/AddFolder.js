@@ -17,12 +17,7 @@ export default class AddFolder extends React.Component {
   handleSubmitFolder = event => {
     event.preventDefault();
 
-    const min = 1;
-    const max = 10000;
-    const generatedId = min + Math.random() * (max - min);
-
     let folderInput = {
-      id: toString(generatedId),
       name: this.props.state.folderName.value
     };
 
@@ -43,13 +38,12 @@ export default class AddFolder extends React.Component {
         }
         return res.json();
       })
-      .then(() => {
+      .then(folder => {
+        this.props.addFolder(folder);
         this.props.clearFolderName();
         this.props.history.push("/");
       })
-      .then(() => {
-        this.props.addFolder(folderInput);
-      })
+      .then(() => {})
 
       .catch(error => {
         console.error(error);

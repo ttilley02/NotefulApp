@@ -44,5 +44,5 @@ NoteListMain.defaultProps = {
 };
 
 NoteListMain.propTypes = {
-  notes: PropTypes.object
+  notes: PropTypes.array
 };

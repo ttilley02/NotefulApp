@@ -99,10 +99,7 @@ class App extends React.Component {
   render() {
     let contextValue = {
       notesAndFolderInfo: this.state,
-      deleteNotefromPage: this.deleteNotefromPage,
-      folders: this.state.folders,
-      notes: this.state.notes,
-      history: this.history
+      deleteNotefromPage: this.deleteNotefromPage
     };
 
     return (
