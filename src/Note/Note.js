@@ -89,7 +89,7 @@ export default class Note extends React.Component {
 }
 
 Note.propTypes = {
-  id: PropTypes.number,
+  id: PropTypes.string,
   folderId: PropTypes.number,
   name: PropTypes.string,
   modified: PropTypes.string,

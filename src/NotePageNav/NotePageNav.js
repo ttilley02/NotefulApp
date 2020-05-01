@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 export default class NotePageNav extends React.Component {
   render() {
     //find the id of the note that matches the noteId from the url
-    let newA = this.props.notes;
+    
 
     const selectedFolderId = this.props.notes.find(
       note => note.id === this.props.selected

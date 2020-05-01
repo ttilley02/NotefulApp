@@ -12,16 +12,17 @@ export default class NoteListMain extends React.Component {
     return (
       // <NoteContext.Provider value={contextValue}>
       <div className="Main">
-        <ul className>
-          {this.props.notes.map(note => {
+        <ul>
+          {this.props.notes.map((note, index) => {
             return (
               <Route
+                key={index}
                 render={({ history }) => (
                   // 'notes' prop will be entire notes array from state
                   <Note
+                    key={index}
                     history={history}
                     modified={note.modified}
-                    key={note.id}
                     id={note.id}
                     name={note.name}
                   />

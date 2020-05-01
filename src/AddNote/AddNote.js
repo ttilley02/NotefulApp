@@ -35,19 +35,16 @@ export default class AddNote extends React.Component {
     let folderIdResult = Object.values(this.props.folderList).find(
       folder => folder.name === this.props.state.noteFolder.value
     );
-
-    const min = 1;
-    const max = 10000;
-    const generatedId = min + Math.random() * (max - min);
     let newDate = new Date();
 
     let noteInput = {
-      id: toString(generatedId),
+      
       name: this.props.state.noteName.value,
       modified: newDate.toLocaleDateString("en-US"),
       folderId: folderIdResult.id,
       content: this.props.state.noteContent.value
     };
+    console.log(noteInput)
 
     fetch(`http://localhost:9090/notes/`, {
       method: "POST",
@@ -66,12 +63,11 @@ export default class AddNote extends React.Component {
         }
         return res.json();
       })
-      .then(() => {
+      .then((note) => {
+        console.log(note)
+        this.props.addNote(note);
         this.props.clearNoteItems();
         this.props.history.push("/");
-      })
-      .then(() => {
-        this.props.addNote(noteInput);
       })
       .catch(error => {
         console.error(error);

@@ -188,12 +188,13 @@ class App extends React.Component {
             <Route
               exact
               path="/notes/:noteId"
-              render={props => {
+              render={(props,history) => {
                 return (
                   <NotePageMain
                     notes={this.state.notes}
                     selected={props.match.params.noteId}
                     state={this.state}
+                    history={history}
                   />
                 );
               }}

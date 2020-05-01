@@ -1,9 +1,8 @@
 import React from "react";
 import Note from "../Note/Note";
-import NoteContext from "../NoteContext";
+import {Route} from "react-router-dom"
 
 export default class NotePageMain extends React.Component {
-  static contextType = NoteContext;
 
   render() {
     // Find the note that has the same id from the url (:noteId)
@@ -13,12 +12,17 @@ export default class NotePageMain extends React.Component {
     return (
       <div className="Main noteContent">
         <h2>Notes</h2>
-        <Note
+        <Route
+          render= {({history})=> (
+            // 'notes' prop will be entire notes array from state
+          <Note
           id={selectedNote.id}
           folderId={selectedNote.folderId}
           name={selectedNote.name}
           modified={selectedNote.modified}
-          history={this.props.history}
+          history={history}
+          />
+          )}
         />
         <p>{selectedNote.content}</p>
       </div>
