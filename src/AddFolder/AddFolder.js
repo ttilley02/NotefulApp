@@ -3,6 +3,7 @@ import ValidationError from "../ValidationError";
 import "../App.css";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import Config from "../config";
 
 export default class AddFolder extends React.Component {
   validateFolderName() {
@@ -16,12 +17,17 @@ export default class AddFolder extends React.Component {
 
   handleSubmitFolder = event => {
     event.preventDefault();
+
+    const min = 1;
+    const max = 10000;
+    const generatedId = min + Math.random() * (max - min);
+
     let folderInput = {
-      id: "",
+      id: generatedId,
       name: this.props.state.folderName.value
     };
 
-    fetch(`http://localhost:9090/folders/`, {
+    fetch(Config.API_ENDPOINT + `api/folders/`, {
       method: "POST",
       body: JSON.stringify(folderInput),
       headers: {
@@ -92,7 +98,7 @@ export default class AddFolder extends React.Component {
 }
 
 AddFolder.propTypes = {
-  updateAddFolderName: PropTypes.func.isRequired,
-  state: PropTypes.object.isRequired,
-  clearFolderName: PropTypes.func.isRequired
+  updateAddFolderName: PropTypes.func,
+  state: PropTypes.object,
+  clearFolderName: PropTypes.func
 };

@@ -13,9 +13,9 @@ export default class NoteListNav extends React.Component {
     return (
       <div className="Sidebar">
         <h2 className="navHead">Folders</h2>
-        <ul>
+        <ul className="bigFolderList">
           {/* Loop through the array of folders passed as a prop */}
-          
+
           {this.props.folders.map(folder => {
             /* for each folder in the array, set variable 'classes' as either
             'folder' or 'folder' AND 'selected'. If the selected folderId is
@@ -49,5 +49,5 @@ NoteListNav.defaultProps = {
 
 NoteListNav.propTypes = {
   folders: PropTypes.array,
-  selected: PropTypes.object
+  selected: PropTypes.string
 };

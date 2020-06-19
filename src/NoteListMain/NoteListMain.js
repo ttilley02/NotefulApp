@@ -12,7 +12,7 @@ export default class NoteListMain extends React.Component {
     return (
       // <NoteContext.Provider value={contextValue}>
       <div className="Main">
-        <ul>
+        <ul className="MainList">
           {this.props.notes.map(note => {
             return (
               <Route
@@ -24,6 +24,7 @@ export default class NoteListMain extends React.Component {
                     key={note.id}
                     id={note.id}
                     name={note.name}
+                    folder_id={note.folder_id}
                   />
                 )}
               />
@@ -44,5 +45,5 @@ NoteListMain.defaultProps = {
 };
 
 NoteListMain.propTypes = {
-  notes: PropTypes.object.isRequired
+  notes: PropTypes.array
 };

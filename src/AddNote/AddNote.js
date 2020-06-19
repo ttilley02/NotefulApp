@@ -4,6 +4,7 @@ import "../App.css";
 import NoteContext from "../NoteContext";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import Config from "../config";
 
 export default class AddNote extends React.Component {
   static contextType = NoteContext;
@@ -42,14 +43,14 @@ export default class AddNote extends React.Component {
     let newDate = new Date();
 
     let noteInput = {
-      id: toString(generatedId),
+      id: generatedId,
       name: this.props.state.noteName.value,
       modified: newDate.toLocaleDateString("en-US"),
-      folderId: folderIdResult.id,
+      folder_id: folderIdResult.id,
       content: this.props.state.noteContent.value
     };
 
-    fetch(`http://localhost:9090/notes/`, {
+    fetch(Config.API_ENDPOINT + `api/notes/`, {
       method: "POST",
       body: JSON.stringify(noteInput),
       headers: {
@@ -154,10 +155,10 @@ export default class AddNote extends React.Component {
 }
 
 AddNote.propTypes = {
-  updateAddNoteName: PropTypes.func.isRequired,
-  updateAddNoteContent: PropTypes.func.isRequired,
-  clearNoteItems: PropTypes.func.isRequired,
-  state: PropTypes.object.isRequired,
-  folderList: PropTypes.object.isRequired,
-  folderSelection: PropTypes.object.isRequired
+  updateAddNoteName: PropTypes.func,
+  updateAddNoteContent: PropTypes.func,
+  clearNoteItems: PropTypes.func,
+  state: PropTypes.object,
+  folderList: PropTypes.array,
+  folderSelection: PropTypes.array
 };

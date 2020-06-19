@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 import "../App.css";
 import note from "./note.png";
 import deleteIcon from "./deleteIcon.png";
+import Config from "../config";
 
 // Found this on stack overflow: https://stackoverflow.com/questions/3552461/how-to-format-a-javascript-date
 function formatDate(date) {
@@ -34,7 +35,7 @@ export default class Note extends React.Component {
   static contextType = NoteContext;
 
   DeleteNote = id => {
-    fetch(`http://localhost:9090/notes/` + id, {
+    fetch(Config.API_ENDPOINT + `api/notes/` + id, {
       method: "DELETE",
       headers: {
         "content-type": "application/json"
@@ -89,10 +90,10 @@ export default class Note extends React.Component {
 }
 
 Note.propTypes = {
-  id: PropTypes.number.isRequired,
-  folderId: PropTypes.number.isRequired,
-  name: PropTypes.string.isRequired,
-  modified: PropTypes.string.isRequired,
-  onDeleteNote: PropTypes.func.isRequired,
-  history: PropTypes.object.isRequired
+  id: PropTypes.number,
+  folder_id: PropTypes.number,
+  name: PropTypes.string,
+  modified: PropTypes.string,
+  onDeleteNote: PropTypes.func,
+  history: PropTypes.object
 };
