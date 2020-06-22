@@ -1,6 +1,7 @@
 import React from "react";
 import Note from "../Note/Note";
 import NoteContext from "../NoteContext";
+import { Route, Link } from "react-router-dom";
 
 export default class NotePageMain extends React.Component {
   static contextType = NoteContext;
@@ -14,12 +15,16 @@ export default class NotePageMain extends React.Component {
     return (
       <div className="Main noteContent">
         <h2>Notes</h2>
-        <Note
-          id={selectedNote.id}
-          folder_id={selectedNote.folder_id}
-          name={selectedNote.name}
-          modified={selectedNote.modified}
-          history={this.props.history}
+        <Route
+          render={({ history }) => (
+            <Note
+              id={selectedNote.id}
+              folder_id={selectedNote.folder_id}
+              name={selectedNote.name}
+              modified={selectedNote.modified}
+              history={history}
+            />
+          )}
         />
         <p>{selectedNote.content}</p>
       </div>
