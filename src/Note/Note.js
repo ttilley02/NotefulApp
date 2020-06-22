@@ -35,7 +35,7 @@ export default class Note extends React.Component {
   static contextType = NoteContext;
 
   DeleteNote = id => {
-    fetch(Config.API_ENDPOINT + `api/notes/` + id, {
+    fetch(Config.API_ENDPOINT + "api/notes/" + id, {
       method: "DELETE",
       headers: {
         "content-type": "application/json"
@@ -49,7 +49,6 @@ export default class Note extends React.Component {
             throw error;
           });
         }
-        return res.json();
       })
       .then(() => {
         this.props.history.push("/");
